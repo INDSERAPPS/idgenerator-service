@@ -6,7 +6,6 @@
 	<groupId>tcs.ms.poc</groupId>
 	<artifactId>idgenerator</artifactId>
 	<version>0.0.1</version>
-	<packaging>jar</packaging>
 
 	<name>idgenerator</name>
 	<description>ID Generator for all applications</description>
@@ -36,6 +35,16 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+		
+		<dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+        
+      	<dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
+        </dependency>
 	</dependencies>
 
 	<dependencyManagement>
@@ -51,6 +60,7 @@
 	</dependencyManagement>
 
 	<build>
+	<finalName>idgenerator</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>

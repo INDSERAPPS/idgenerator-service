@@ -1,0 +1,20 @@
+server:
+  port: 9098
+eureka:
+  instance:
+    leaseRenewalIntervalInSeconds: 1
+    leaseExpirationDurationInSeconds: 2
+    hostname: tcs-poc-ms-customerservice-ca-i1
+  client:
+    serviceUrl:
+      defaultZone: http://tcs-poc-ms-eurekaserver-ca-i1.ca-central-1.elasticbeanstalk.com/eureka
+    healthcheck:
+      enabled: true
+    lease:
+      duration: 5
+spring:
+  application:
+    name: tcs-poc-ms-customerservice-ca-i1
+logging:
+  level:
+    org.exampledriven.eureka: DEBUG
