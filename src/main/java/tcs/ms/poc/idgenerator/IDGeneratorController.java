@@ -11,9 +11,14 @@ import org.springframework.web.bind.annotation.RestController;
 	@RestController
 	@RequestMapping("/idgenerator/")
 	public class IDGeneratorController {
+		
 	    @GetMapping(value="/getID")
 	    public String getID(@RequestParam(value="type",required=true) String type) {
-	        return type + "-" + createUniqueID();
+	    	//String[] sArrayUniqueX = new String[] {"A","B","C","D"}; 
+	    	//Random rand = new Random();
+			//int randomNum = rand.nextInt(4);
+			//String UniqueX = sArrayUniqueX[randomNum];
+	        return type + createUniqueID();
 	    }
 	   
 	private String createUniqueID()
