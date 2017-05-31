@@ -1,10 +1,10 @@
 server:
-  port: 9098
+  port: 8501
 eureka:
   instance:
     leaseRenewalIntervalInSeconds: 1
     leaseExpirationDurationInSeconds: 2
-    hostname: tcs-poc-ms-customerservice-ca-i1
+    hostname: tcs-poc-ms-idgenerator-ca-i1
   client:
     serviceUrl:
       defaultZone: http://tcs-poc-ms-eurekaserver-ca-i1.ca-central-1.elasticbeanstalk.com/eureka
@@ -14,7 +14,7 @@ eureka:
       duration: 5
 spring:
   application:
-    name: tcs-poc-ms-customerservice-ca-i1
+    name: tcs-poc-ms-idgenerator-ca-i1
 logging:
   level:
     org.exampledriven.eureka: DEBUG
