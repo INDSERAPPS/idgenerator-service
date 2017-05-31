@@ -3,7 +3,6 @@ package tcs.ms.poc.idgenerator;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
-import org.joda.time.Instant;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -32,7 +31,7 @@ import org.springframework.web.bind.annotation.RestController;
 			System.out.println("Now time in milli part - " + i + " - " +  sArrayTimeNow[i]);
 			sbUniqueID.append(getRandomMap(sArrayTimeNow[i]));
 		   }
-		
+		System.out.println("Generated ID- " + sbUniqueID.toString());
 		return sbUniqueID.toString();
 		}
 		catch (Exception ex)
@@ -45,7 +44,7 @@ import org.springframework.web.bind.annotation.RestController;
 	private String getRandomMap(String SeqID)
 	{
 		Random rand = new Random();
-		int randomNum = rand.nextInt(5) + 1;
+		int randomNum = rand.nextInt(5);
 		String seqIDMap="0";
 		System.out.println("Random ID - " + randomNum);
 		switch(SeqID){    
