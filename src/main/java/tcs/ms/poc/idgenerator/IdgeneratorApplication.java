@@ -23,5 +23,4 @@ public class IdgeneratorApplication extends SpringBootServletInitializer {
 	        return application.sources(IdgeneratorApplication.class);
 	    }
 
-	 //   private static Class<IdgeneratorApplication> applicationClass = IdgeneratorApplication.class;
 }
