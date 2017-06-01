@@ -13,16 +13,28 @@ import org.springframework.web.bind.annotation.RestController;
 		
 	    @GetMapping(value="/getID")
 	    public String getID(@RequestParam(value="type",required=true) String type) {
-	    	String[] sArrayUniqueX = new String[] {"A","B","C","D"}; 
-	    	Random randX = new Random();
-			int randomNumX = randX.nextInt(4);
-			String UniqueX = sArrayUniqueX[randomNumX];
-	    	String[] sArrayUniqueY = new String[] {"2","3","4","5","6","7","8","9"}; 
-	    	Random randY = new Random();
-			int randomNumY = randY.nextInt(8);
-			String UniqueY = sArrayUniqueX[randomNumY];
-			
-	        return type + createUniqueID() + UniqueX + UniqueY;
+	    	System.out.println("API:/getID, type:" + type);
+	    	if (type.trim().length()>1)
+	    	{
+		    	String[] sArrayUniqueX = new String[] {"A","B","C","D"}; 
+		    	Random randX = new Random();
+				int randomNumX = randX.nextInt(4);
+				String UniqueX = sArrayUniqueX[randomNumX];
+				//to-do change to check sum
+		    	String[] sArrayUniqueY = new String[] {"2","3","4","5","6","7","8","9"}; 
+		    	Random randY = new Random();
+				int randomNumY = randY.nextInt(8);
+				String UniqueY = sArrayUniqueY[randomNumY];
+				type = type.substring(0, 2).toUpperCase();
+				String sID = type + createUniqueID() + UniqueX + UniqueY;
+				System.out.println("ID Generated:" + sID);
+		        return type + createUniqueID() + UniqueX + UniqueY;
+	    	}
+	    	else
+	    	{
+	    		System.out.println("Error: Invalid length for type. Length of type should be 2.");
+	    		return "Error: Invalid length for type. Length of type should be 2.";
+	    	}
 	    }
 	   
 	private String createUniqueID()
@@ -34,13 +46,15 @@ import org.springframework.web.bind.annotation.RestController;
 		String[] sArrayTimeNow = millitimeNowString.split("");
 		StringBuilder sbUniqueID = new StringBuilder();
 		
-		System.out.println("Now time in milli - " + millitimeNowString);
-		
+		System.out.println("Time Now:" + millitimeNowString);
+		System.out.print("ID Creation:");
 		for (int i = 0; i < sArrayTimeNow.length ; i++) {
-			System.out.println("Now time in milli part - " + i + " - " +  sArrayTimeNow[i]);
+			System.out.print("Part:" + i + "-" +  sArrayTimeNow[i] + "{");
 			sbUniqueID.append(getRandomMap(sArrayTimeNow[i]));
+			System.out.print("},");
 		   }
-		System.out.println("Generated ID- " + sbUniqueID.toString());
+		System.out.println("");
+		System.out.println("Key Generated:" + sbUniqueID.toString());
 		return sbUniqueID.toString();
 		}
 		catch (Exception ex)
@@ -52,10 +66,12 @@ import org.springframework.web.bind.annotation.RestController;
 	
 	private String getRandomMap(String SeqID)
 	{
+		try
+		{
 		Random rand = new Random();
 		int randomNum = rand.nextInt(5);
 		String seqIDMap="0";
-		System.out.println("Random ID - " + randomNum);
+		System.out.print("getRandomMap:{randomNum:" + randomNum);
 		switch(SeqID){    
 		case "0":    
 			String[] sArray0 = new String[] {"J","g","k","G","T"}; 
@@ -98,7 +114,13 @@ import org.springframework.web.bind.annotation.RestController;
 			seqIDMap = sArray9[randomNum];
 			break;
 		}
-		System.out.println("Sequence Map - " + seqIDMap);
+		System.out.print(", seqIDMap:" + seqIDMap + "}");
 		 return seqIDMap;
+		}
+		 catch (Exception ex)
+			{
+				System.out.println(ex.toString());
+				throw ex;
+			}
 	}
 	}

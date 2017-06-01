@@ -4,17 +4,17 @@ eureka:
   instance:
     leaseRenewalIntervalInSeconds: 1
     leaseExpirationDurationInSeconds: 2
-    hostname: tcs-poc-ms-idgenerator-ca-i1
+    hostname: tcs-poc-ms-idgenerator-us-i2
   client:
     serviceUrl:
-      defaultZone: http://tcs-poc-ms-eurekaserver-ca-i1.ca-central-1.elasticbeanstalk.com/eureka
+      defaultZone: http://tcs-poc-ms-eurekaserver-us-i2.us-east-1.elasticbeanstalk.com/eureka
     healthcheck:
       enabled: true
     lease:
       duration: 5
 spring:
   application:
-    name: tcs-poc-ms-idgenerator-ca-i1
+    name: tcs-poc-ms-idgenerator-us-i2
 logging:
   level:
     org.exampledriven.eureka: DEBUG
