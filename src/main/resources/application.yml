@@ -14,7 +14,7 @@ eureka:
       duration: 5
 spring:
   application:
-    name: tcs-poc-ms-idgenerator-us-i2
+    name: TCS-POC-MS-IDGENERATOR
 logging:
   level:
     org.exampledriven.eureka: DEBUG
