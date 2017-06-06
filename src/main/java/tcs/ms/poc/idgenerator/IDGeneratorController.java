@@ -11,7 +11,12 @@ import org.springframework.web.bind.annotation.RestController;
 	@RestController
 	public class IDGeneratorController {
 		
-	    @GetMapping(value="/getID")
+        @RequestMapping(value = "/")
+        public String home() {
+        	return "Okay!";
+        }
+
+	    @GetMapping(value="/ID")
 	    public String getID(@RequestParam(value="type",required=true) String type) {
 	    	System.out.println("API:/getID, type:" + type);
 	    	if (type.trim().length()>1)
