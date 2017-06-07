@@ -3,13 +3,19 @@ package tcs.ms.poc.idgenerator;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+
+
 	@RestController
 	public class IDGeneratorController {
+		
+		private static Logger log = LogManager.getLogger(IDGeneratorController.class);
 		
         @RequestMapping(value = "/")
         public String home() {
@@ -18,6 +24,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 	    @GetMapping(value="/ID")
 	    public String getID(@RequestParam(value="type",required=true) String type) {
+	    	log.info("API:/ID"+"type:"+type);
 	    	System.out.println("API:/getID, type:" + type);
 	    	if (type.trim().length()>1)
 	    	{
@@ -38,6 +45,7 @@ import org.springframework.web.bind.annotation.RestController;
 	    	else
 	    	{
 	    		System.out.println("Error: Invalid length for type. Length of type should be 2.");
+	    		log.info("Error: Invalid length for type. Length of type should be 2.");
 	    		return "Error: Invalid length for type. Length of type should be 2.";
 	    	}
 	    }
@@ -51,20 +59,27 @@ import org.springframework.web.bind.annotation.RestController;
 		String[] sArrayTimeNow = millitimeNowString.split("");
 		StringBuilder sbUniqueID = new StringBuilder();
 		
+		log.info("Time Now:" + millitimeNowString);
 		System.out.println("Time Now:" + millitimeNowString);
 		System.out.print("ID Creation:");
+		log.info("ID Creation:");
 		for (int i = 0; i < sArrayTimeNow.length ; i++) {
 			System.out.print("Part:" + i + "-" +  sArrayTimeNow[i] + "{");
+			log.info("Part:" + i + "-" +  sArrayTimeNow[i] + "{");
 			sbUniqueID.append(getRandomMap(sArrayTimeNow[i]));
 			System.out.print("},");
+			log.info("},");
 		   }
 		System.out.println("");
+		log.info("");
 		System.out.println("Key Generated:" + sbUniqueID.toString());
+		log.info("Key Generated:" + sbUniqueID.toString());
 		return sbUniqueID.toString();
 		}
 		catch (Exception ex)
 		{
 			System.out.println(ex.toString());
+			log.info(ex.toString());
 			throw ex;
 		}
 		}
@@ -76,6 +91,7 @@ import org.springframework.web.bind.annotation.RestController;
 		Random rand = new Random();
 		int randomNum = rand.nextInt(5);
 		String seqIDMap="0";
+		log.info("getRandomMap:{randomNum:" + randomNum);
 		System.out.print("getRandomMap:{randomNum:" + randomNum);
 		switch(SeqID){    
 		case "0":    
@@ -120,10 +136,13 @@ import org.springframework.web.bind.annotation.RestController;
 			break;
 		}
 		System.out.print(", seqIDMap:" + seqIDMap + "}");
+		log.info(", seqIDMap:" + seqIDMap + "}");
+		
 		 return seqIDMap;
 		}
 		 catch (Exception ex)
 			{
+			 log.info(ex.toString());
 				System.out.println(ex.toString());
 				throw ex;
 			}

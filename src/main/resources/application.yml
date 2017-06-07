@@ -18,3 +18,7 @@ spring:
 logging:
   level:
     org.exampledriven.eureka: DEBUG
+    
+    
+logging:
+   config: classpath:log4j2.xml
