@@ -16,9 +16,7 @@ spring:
   application:
     name: TCS-POC-MS-IDGENERATOR
 logging:
-  level:
-    org.exampledriven.eureka: DEBUG
+  
+  config: classpath:log4j2-spring.xml
     
     
-logging:
-   config: classpath:log4j2.xml
