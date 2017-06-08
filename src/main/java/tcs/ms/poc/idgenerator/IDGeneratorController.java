@@ -92,7 +92,7 @@ import org.springframework.web.bind.annotation.RestController;
 		int randomNum = rand.nextInt(5);
 		String seqIDMap="0";
 		log.info("getRandomMap:{randomNum:" + randomNum);
-		System.out.print("getRandomMap:{randomNum:" + randomNum);
+		//System.out.print("getRandomMap:{randomNum:" + randomNum);
 		switch(SeqID){    
 		case "0":    
 			String[] sArray0 = new String[] {"J","g","k","G","T"}; 
