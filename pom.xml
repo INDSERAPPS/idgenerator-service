@@ -32,7 +32,16 @@
 		    <version>3.1.0</version>
 		    <scope>provided</scope>
 		</dependency>
-
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter</artifactId>
+            <exclusions>
+        <exclusion>
+          <groupId>org.springframework.boot</groupId>
+          <artifactId>spring-boot-starter-logging</artifactId>
+        </exclusion>
+      </exclusions>
+      </dependency>
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-eureka</artifactId>
@@ -61,9 +70,11 @@
         </dependency>
         
         <dependency>
+      
     <groupId>org.springframework.boot</groupId>
     <artifactId>spring-boot-starter-log4j2</artifactId>
-   </dependency>
+   
+        </dependency>
         
 	</dependencies>
 
@@ -86,6 +97,27 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
+			<plugin>
+		<groupId>org.wildfly.plugins</groupId>
+		<artifactId>wildfly-maven-plugin</artifactId>
+		<version>1.1.0.Alpha10</version>
+		<executions>
+			<execution>
+				<phase>install</phase>
+				<!-- <goals>
+					<goal>redeploy</goal>
+				</goals> -->
+			</execution>
+		</executions>
+		<configuration>
+			<force>true</force>
+			<hostname>54.210.116.181</hostname>
+			<port>9990</port>
+			<username>admin</username>
+			<password>i-0dddb2a6f8c711885</password>
+			<filename>idgenerator.war</filename>
+		</configuration>
+	   </plugin>
 		</plugins>
 	</build>
 
