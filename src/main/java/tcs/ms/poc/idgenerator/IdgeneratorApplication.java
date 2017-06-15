@@ -14,6 +14,7 @@ import org.springframework.context.annotation.Configuration;
 @EnableAutoConfiguration
 public class IdgeneratorApplication extends SpringBootServletInitializer {
 
+	
 	public static void main(String[] args) {
 		SpringApplication.run(IdgeneratorApplication.class, args);
 	}
