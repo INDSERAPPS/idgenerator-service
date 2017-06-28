@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>tcs.ms.poc</groupId>
@@ -14,7 +16,7 @@
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
 		<version>1.5.3.RELEASE</version>
-		<relativePath/> <!-- lookup parent from repository -->
+		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
 
 	<properties>
@@ -25,23 +27,23 @@
 	</properties>
 
 	<dependencies>
-	
+
 		<dependency>
-		    <groupId>javax.servlet</groupId>
-		    <artifactId>javax.servlet-api</artifactId>
-		    <version>3.1.0</version>
-		    <scope>provided</scope>
+			<groupId>javax.servlet</groupId>
+			<artifactId>javax.servlet-api</artifactId>
+			<version>3.1.0</version>
+			<scope>provided</scope>
 		</dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter</artifactId>
-            <exclusions>
-        <exclusion>
-          <groupId>org.springframework.boot</groupId>
-          <artifactId>spring-boot-starter-logging</artifactId>
-        </exclusion>
-      </exclusions>
-      </dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter</artifactId>
+			<exclusions>
+				<exclusion>
+					<groupId>org.springframework.boot</groupId>
+					<artifactId>spring-boot-starter-logging</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-eureka</artifactId>
@@ -52,30 +54,30 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
-		
+
 		<dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
 			<exclusions>
-                <exclusion>
-                    <groupId>org.springframework.boot</groupId>
-                    <artifactId>spring-boot-starter-tomcat</artifactId>
-                </exclusion>
-            </exclusions> 
-        </dependency>
-        
-      	<dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-actuator</artifactId>
-        </dependency>
-        
-        <dependency>
-      
-    <groupId>org.springframework.boot</groupId>
-    <artifactId>spring-boot-starter-log4j2</artifactId>
-   
-        </dependency>
-        
+				<exclusion>
+					<groupId>org.springframework.boot</groupId>
+					<artifactId>spring-boot-starter-tomcat</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-actuator</artifactId>
+		</dependency>
+
+		<dependency>
+
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-log4j2</artifactId>
+
+		</dependency>
+
 	</dependencies>
 
 	<dependencyManagement>
@@ -91,35 +93,63 @@
 	</dependencyManagement>
 
 	<build>
-	<finalName>idgenerator</finalName>
+		<finalName>idgenerator</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
 			<plugin>
-		<groupId>org.wildfly.plugins</groupId>
-		<artifactId>wildfly-maven-plugin</artifactId>
-		<version>1.1.0.Alpha10</version>
-		<executions>
-			<execution>
-				<phase>install</phase>
-				<!-- <goals>
-					<goal>redeploy</goal>
-				</goals> -->
-			</execution>
-		</executions>
-		<configuration>
-			<force>true</force>
-			<hostname>54.210.116.181</hostname>
-			<port>9990</port>
-			<username>admin</username>
-			<password>i-0dddb2a6f8c711885</password>
-			<filename>idgenerator.war</filename>
-		</configuration>
-	   </plugin>
+				<groupId>org.wildfly.plugins</groupId>
+				<artifactId>wildfly-maven-plugin</artifactId>
+				<version>1.1.0.Alpha10</version>
+				<configuration>
+					<id>${wildfly-id}</id>
+					<hostname>${wildfly-hostname}</hostname>
+					<port>${wildfly-port}</port>
+				</configuration>
+				<executions>
+					<execution>
+						<id>Customer_CA_Server1</id>
+						<phase>install</phase>
+						<goals>
+							<goal>deploy</goal>
+						</goals>
+						<configuration>
+							<id>Customer_CA_Server1</id>
+							<hostname>35.182.84.185</hostname>
+							<port>9990</port>
+						</configuration>
+					</execution>
+					<execution>
+						<id>IDGenetrator_CA_Server1</id>
+						<phase>install</phase>
+						<goals>
+							<goal>deploy</goal>
+						</goals>
+						<configuration>
+							<id>IDGenetrator_CA_Server1</id>
+							<hostname>52.60.208.82</hostname>
+							<port>9990</port>
+						</configuration>
+					</execution>
+				</executions>
+
+
+				<!-- <configuration> <force>true</force> <hostname>35.182.96.71</hostname> 
+					<port>9990</port> <username>admin</username> <password>i-0a43255fd13b00824</password> 
+					<filename>idgenerator.war</filename> </configuration> -->
+			</plugin>
+
+			<!-- <plugin> <groupId>org.wildfly.plugins</groupId> <artifactId>wildfly-maven-plugin</artifactId> 
+				<version>1.1.0.Alpha10</version> <executions> <execution> <phase>install</phase> 
+				<goals> <goal>redeploy</goal> </goals> </execution> </executions> <configuration> 
+				<force>true</force> <hostname>35.182.84.185</hostname> <port>9990</port> 
+				<username>admin</username> <password>i-05acf475b174c7ba2</password> <filename>idgenerator.war</filename> 
+				</configuration> </plugin> -->
 		</plugins>
 	</build>
+
 
 
 	<packaging>war</packaging>
