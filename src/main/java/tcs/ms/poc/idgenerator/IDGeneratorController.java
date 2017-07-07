@@ -1,9 +1,11 @@
 package tcs.ms.poc.idgenerator;
 
+import java.util.ArrayList;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -14,6 +16,9 @@ import org.springframework.web.bind.annotation.RestController;
 		
 		private static Logger log = LogManager.getLogger(IDGeneratorController.class);
 		
+		@Autowired
+		private InsertUniqueIdService insertUniqueIdService ;
+		
         @RequestMapping(value = "/")
         public String home() {
         	return "Okay!";
@@ -23,7 +28,7 @@ import org.springframework.web.bind.annotation.RestController;
 	    public String getID(@RequestParam(value="type",required=true) String type) {
 	    	log.info("API:/ID"+"type:"+type);
 	    	System.out.println("API:/getID, type:" + type);
-	    	if (type.trim().length()>1)
+	    	if ((type.trim().length()>1)&&(validateAcceptedPrefixes(type)))
 	    	{
 		    	String[] sArrayUniqueX = new String[] {"A","B","C","D"}; 
 		    	Random randX = new Random();
@@ -35,9 +40,20 @@ import org.springframework.web.bind.annotation.RestController;
 				int randomNumY = randY.nextInt(8);
 				String UniqueY = sArrayUniqueY[randomNumY];
 				type = type.substring(0, 2).toUpperCase();
-				String sID = type + createUniqueID() + UniqueX + UniqueY;
-				System.out.println("ID Generated:" + sID);
-		        return type + createUniqueID() + UniqueX + UniqueY;
+				String sID = null ;
+				
+				String uniqueId = type + createUniqueID() + UniqueX + UniqueY;
+				while(uniqueId!= null)
+				{
+					if(IdGenerator.findById(uniqueId)==null)
+					{
+					sID = uniqueId ;
+					insertUniqueIdService.insertUniqueId(sID);
+					break ;
+					}
+					uniqueId = type + createUniqueID() + UniqueX + UniqueY;
+				}
+		        return sID;
 	    	}
 	    	else
 	    	{
@@ -143,5 +159,18 @@ import org.springframework.web.bind.annotation.RestController;
 				System.out.println(ex.toString());
 				throw ex;
 			}
+	}
+	
+	private boolean validateAcceptedPrefixes(String type)
+	{
+		String[] typeList ={"CU","PR","OR","CT","PT","ML","LG"} ;
+		for(int i=0;i<typeList.length;i++)
+		{
+			if(typeList[i].equals(type))
+			{
+				return true ;
+			}
+		}
+		return false ;
 	}
 	}
