@@ -45,7 +45,7 @@ import org.springframework.web.bind.annotation.RestController;
 				String uniqueId = type + createUniqueID() + UniqueX + UniqueY;
 				while(uniqueId!= null)
 				{
-					if(IdGenerator.findById(uniqueId)==null)
+					if(insertUniqueIdService.findById(uniqueId)==null)
 					{
 					sID = uniqueId ;
 					insertUniqueIdService.insertUniqueId(sID);

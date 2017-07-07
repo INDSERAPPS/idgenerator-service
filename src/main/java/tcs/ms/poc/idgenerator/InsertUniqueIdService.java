@@ -30,4 +30,10 @@ public class InsertUniqueIdService {
 		
 	}
 
+	public IdGenerator findById(String uniqueId) {
+		
+		injectPersistenceContext() ;
+		return IdGenerator.findById(uniqueId) ;
+	}
+
 }
