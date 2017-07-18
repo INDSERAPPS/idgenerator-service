@@ -95,6 +95,18 @@
 			<artifactId>spring-boot-starter-log4j2</artifactId>
 
 		</dependency>
+		<dependency>
+    <groupId>com.google.code.findbugs</groupId>
+    <artifactId>jsr305</artifactId>
+    <version>3.0.2</version>
+</dependency>
+
+<dependency>
+    <groupId>oracle</groupId>
+    <artifactId>ojdbc6</artifactId>
+    <version>11.2.0.3</version>
+</dependency>
+
 
 	</dependencies>
 
